@@ -1,10 +1,9 @@
 import connectDB from './config/connectdb.js';
 import userRoutes from './routes/userRoutes.js';
-
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
 dotenv.config();
-const express = require('express');
-const cors = require('cors');
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT;
@@ -15,6 +14,7 @@ app.use(cors());
 connectDB(DATABASE_URL)
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/user", userRoutes)
 
